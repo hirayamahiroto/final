@@ -12,10 +12,7 @@ return new class extends Migration {
     {
         Schema::create("offer", function (Blueprint $table) {
             $table->bigIncrements("id");
-            $table
-                ->string("name")
-                ->nullable(false)
-                ->default("----");
+            $table->string("name")->nullable(false);
 
             //第一引数：桁数、第二引数：小数点以下0桁まで
             $table->decimal("salary", 10, 0);

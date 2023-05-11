@@ -1,7 +1,6 @@
 <?php
 
 return [
-
     /*
     |--------------------------------------------------------------------------
     | Authentication Defaults
@@ -13,9 +12,9 @@ return [
     |
     */
 
-    'defaults' => [
-        'guard' => 'web',
-        'passwords' => 'users',
+    "defaults" => [
+        "guard" => "web",
+        "passwords" => "users",
     ],
 
     /*
@@ -35,10 +34,19 @@ return [
     |
     */
 
-    'guards' => [
-        'web' => [
-            'driver' => 'session',
-            'provider' => 'users',
+    // 認証機能の提供
+    "guards" => [
+        // ユーザー側
+        "web" => [
+            "driver" => "session",
+            "provider" => "users",
+        ],
+
+        // 管理者側
+        "admin" => [
+            // セッション情報を管理(クッキーなど)
+            "driver" => "session",
+            "provider" => "admins",
         ],
     ],
 
@@ -59,16 +67,22 @@ return [
     |
     */
 
-    'providers' => [
-        'users' => [
-            'driver' => 'eloquent',
-            'model' => App\Models\User::class,
+    // 認証の対象を指定
+    "providers" => [
+        "users" => [
+            "driver" => "eloquent",
+            "model" => App\Models\User::class,
         ],
 
         // 'users' => [
         //     'driver' => 'database',
         //     'table' => 'users',
         // ],
+
+        "admins" => [
+            "driver" => "eloquent",
+            "model" => App\Models\Admin::class,
+        ],
     ],
 
     /*
@@ -90,12 +104,12 @@ return [
     |
     */
 
-    'passwords' => [
-        'users' => [
-            'provider' => 'users',
-            'table' => 'password_reset_tokens',
-            'expire' => 60,
-            'throttle' => 60,
+    "passwords" => [
+        "users" => [
+            "provider" => "users",
+            "table" => "password_reset_tokens",
+            "expire" => 60,
+            "throttle" => 60,
         ],
     ],
 
@@ -110,6 +124,5 @@ return [
     |
     */
 
-    'password_timeout' => 10800,
-
+    "password_timeout" => 10800,
 ];
