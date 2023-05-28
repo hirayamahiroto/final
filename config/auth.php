@@ -48,6 +48,12 @@ return [
             "driver" => "session",
             "provider" => "admins",
         ],
+        // 企業側
+        "company" => [
+            // セッション情報を管理(クッキーなど)
+            "driver" => "session",
+            "provider" => "companies",
+        ],
     ],
 
     /*
@@ -77,6 +83,11 @@ return [
         "admins" => [
             "driver" => "eloquent",
             "model" => App\Models\Admin::class,
+        ],
+
+        "companies" => [
+            "driver" => "eloquent",
+            "model" => App\Models\Company::class,
         ],
     ],
 
@@ -109,6 +120,14 @@ return [
         "admins" => [
             // 追加
             "provider" => "admins", // 追加
+            "table" => "password_resets", // 追加
+            "expire" => 60, // 追加
+            "throttle" => 60, // 追加
+        ],
+
+        "companies" => [
+            // 追加
+            "provider" => "companies", // 追加
             "table" => "password_resets", // 追加
             "expire" => 60, // 追加
             "throttle" => 60, // 追加

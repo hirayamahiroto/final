@@ -26,8 +26,11 @@ class RedirectIfAuthenticated
             if (Auth::guard($guard)->check()) {
                 if ($guard == "admin") {
                     return redirect(RouteServiceProvider::ADMIN_HOME);
-                } // 追加
-                return redirect(RouteServiceProvider::HOME);
+                } elseif ($guard == "company") {
+                    return redirect(RouteServiceProvider::COMPANY_HOME);
+                } else {
+                    return redirect(RouteServiceProvider::HOME);
+                }
             }
         }
 
