@@ -10,4 +10,9 @@ class Feature extends Model
     use HasFactory;
 
     protected $fillable = ["name", "offer_id"];
+
+    public function offers()
+    {
+        return $this->belongsToMany(Offer::class, "offer_features");
+    }
 }

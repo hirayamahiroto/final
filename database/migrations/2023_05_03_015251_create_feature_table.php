@@ -4,28 +4,29 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration {
+class CreateFeatureTable extends Migration
+{
     /**
      * Run the migrations.
+     *
+     * @return void
      */
-    public function up(): void
+    public function up()
     {
-        Schema::create("feature", function (Blueprint $table) {
-            $table->bigIncrements("id");
-            $table->string("name")->nullable(false);
-            $table
-                ->foreignId("offer_id")
-                ->constrained("offer")
-                ->cascadeOnDelete();
+        Schema::create("features", function (Blueprint $table) {
+            $table->id();
+            $table->string("name");
             $table->timestamps();
         });
     }
 
     /**
      * Reverse the migrations.
+     *
+     * @return void
      */
-    public function down(): void
+    public function down()
     {
-        Schema::dropIfExists("feature");
+        Schema::dropIfExists("features");
     }
-};
+}

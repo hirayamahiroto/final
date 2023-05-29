@@ -8,6 +8,9 @@ use App\Models\Company;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
+
 class FeatureController extends Controller
 {
     public function index(Request $request): View
@@ -23,24 +26,36 @@ class FeatureController extends Controller
 
     public function create(Request $request)
     {
-        $name = $request->input("name");
-        $offer_id = $request->input("offer_id");
+        $validator = Validator::make($request->all(), [
+            "name" => "required",
+            "offer_id" => "nullable|integer",
+        ]);
 
-        if (!empty($name) && !empty($offer_id)) {
-            Feature::create([
-                "name" => $name,
-                "offer_id" => $offer_id,
-            ]);
-
-            return redirect()
-                ->route("admin.feature")
-                ->with("success", "業界を登録しました");
-        } else {
+        if ($validator->fails()) {
             return redirect()
                 ->back()
-                ->with("error", "業界名を入力してください");
+                ->withErrors($validator)
+                ->withInput();
         }
+
+        $name = $request->input("name");
+        $offerId = $request->input("offer_id");
+
+        $featureData = [
+            "name" => $name,
+        ];
+
+        if (!empty($offerId)) {
+            $featureData["offer_id"] = $offerId;
+        }
+
+        Feature::create($featureData);
+
+        return redirect()
+            ->route("admin.feature")
+            ->with("success", "特徴を登録しました");
     }
+
     public function destroy($id)
     {
         $feature = Feature::findOrFail($id);

@@ -9,6 +9,7 @@
             <tr>
                 <th class="border border-slate-600 w-96 bg-neutral-300 text-black">求人名</th>
                 <th class="border border-slate-600 w-96 bg-neutral-300 text-black">給与</th>
+                <th class="border border-slate-600 w-96 bg-neutral-300 text-black">特徴</th>
                 <th class="border border-slate-600 w-96 bg-neutral-300 text-black">編集</th>
             </tr>
         </thead>
@@ -19,6 +20,14 @@
                 </td>
                 <td class="border border-slate-600 w-96 text-center">
                     <input class="text-black" type="text" name="salary" required>
+                </td>
+                <td class="border border-slate-600 w-96 text-center">
+                    <select name="feature_id">
+                        <option value="特徴を選択してください">特徴を選択してください</option>
+                        @foreach ($features as $feature)
+                            <option value="{{ $feature->id }}">{{ $feature->name }}</option>
+                        @endforeach
+                    </select>
                 </td>
                 <td class="border border-slate-600 w-96">
                     <div class="flex justify-center">

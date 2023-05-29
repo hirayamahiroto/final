@@ -24,7 +24,11 @@ return new class extends Migration {
                 ->default("社長");
             $table->string("password");
             //外部とやり寄りするため、nullable
-            $table->foreignId("industry_id")->nullable()->constrained("industries")->cascadeOnDelete();
+            $table
+                ->foreignId("industry_id")
+                ->nullable()
+                ->constrained("industries")
+                ->cascadeOnDelete();
             $table->rememberToken();
             $table->timestamps();
         });

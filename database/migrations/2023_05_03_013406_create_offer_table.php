@@ -10,7 +10,7 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create("offer", function (Blueprint $table) {
+        Schema::create("offers", function (Blueprint $table) {
             $table->bigIncrements("id");
             $table->string("name")->nullable(false);
 
@@ -23,7 +23,6 @@ return new class extends Migration {
                 ->nullable(false)
                 ->constrained("companies")
                 ->cascadeOnDelete();
-
             $table->timestamps();
         });
     }
@@ -33,6 +32,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists("offer");
+        Schema::dropIfExists("offers");
     }
 };

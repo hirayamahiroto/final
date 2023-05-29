@@ -4,7 +4,7 @@
     <table class="border-separate border border-slate-500 min-w-full text-gray-50">
         <thead>
           <tr>
-            <th class="border border-slate-600 w-96 bg-neutral-300 text-black">求人No.</th>
+            {{-- <th class="border border-slate-600 w-96 bg-neutral-300 text-black">求人No.</th> --}}
             <th class="border border-slate-600 w-96 bg-neutral-300 text-black">特徴</th>
             <th class="border border-slate-600 w-96 bg-neutral-300 text-black">編集</th>
 
@@ -13,9 +13,9 @@
         <tbody>
 
           <tr>
-            <td class="border border-slate-600 w-96 text-center">
+            {{-- <td class="border border-slate-600 w-96 text-center">
                 <input class="text-black" type="text" name="offer_id" required>
-            </td>
+            </td> --}}
 
             <td class="border border-slate-600 w-96 text-center">
                 <input class="text-black" type="text" name="name" required>
