@@ -20,7 +20,7 @@ return new class extends Migration {
             //求人情報(外部キー)
             $table
                 ->foreignId("offer_id")
-                ->constrained("offer")
+                ->constrained("offers")
                 ->cascadeOnDelete();
 
             $table->timestamps();

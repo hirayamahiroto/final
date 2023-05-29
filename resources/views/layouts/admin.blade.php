@@ -27,10 +27,16 @@
                 </header>
             @endif
 
+            <div class="flex">
+            {{-- sidebar --}}
+            @include('layouts.admin_sidebar')
+
             <!-- Page Content -->
             <main>
                 {{ $slot }}
             </main>
+
+            </div>
         </div>
     </body>
 </html>
