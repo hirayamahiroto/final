@@ -34,4 +34,14 @@ class Company extends Model implements Authenticatable
     protected $casts = [
         "email_verified_at" => "datetime",
     ];
+
+    public function appliedOffers()
+    {
+        return $this->hasMany(Offer::class);
+    }
+
+    public function registrations()
+    {
+        return $this->hasMany(Registration::class);
+    }
 }

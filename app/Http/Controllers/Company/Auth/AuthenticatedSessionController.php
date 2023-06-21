@@ -3,12 +3,12 @@
 namespace App\Http\Controllers\Company\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Auth\LoginRequest;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
+use Illuminate\Support\Facades\DB;
 
 class AuthenticatedSessionController extends Controller
 {
@@ -23,13 +23,17 @@ class AuthenticatedSessionController extends Controller
     /**
      * Handle an incoming authentication request.
      */
-    public function store(LoginRequest $request): RedirectResponse
+    public function store(Request $request): RedirectResponse
     {
-        $request->authenticate();
+        $credentials = $request->only("email", "password");
 
-        $request->session()->regenerate();
-
-        return redirect()->intended(RouteServiceProvider::COMPANY_HOME);
+        if (Auth::guard("company")->attempt($credentials)) {
+            return redirect()->intended("company/dashboard");
+        } else {
+            return back()->withErrors([
+                "email" => "The provided credentials do not match our records.",
+            ]);
+        }
     }
 
     /**
@@ -44,5 +48,26 @@ class AuthenticatedSessionController extends Controller
         $request->session()->regenerateToken();
 
         return redirect("/company/login");
+    }
+
+    // ============================================
+    // company user
+
+    public function user_create(): View
+    {
+        return view("company.auth.user_login");
+    }
+
+    public function user_store(Request $request)
+    {
+        $credentials = $request->only("company_id", "email", "password");
+
+        if (Auth::guard("company_users")->attempt($credentials)) {
+            return redirect()->intended("company/dashboard");
+        } else {
+            return back()->withErrors([
+                "email" => "The provided credentials do not match our records.",
+            ]);
+        }
     }
 }

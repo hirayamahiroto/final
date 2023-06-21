@@ -10,13 +10,13 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create("user", function (Blueprint $table) {
+        Schema::create("users", function (Blueprint $table) {
             $table->bigIncrements("id");
             $table->string("name")->nullable(false);
             $table->enum("status", ["選択しない", "男性", "女性"]);
-            $table->string("address")->nullable(false);
-            $table->string("pass")->nullable(false);
-            $table->string("mail")->nullable(false);
+            $table->string("address")->nullable();
+            $table->string("password")->nullable(false);
+            $table->string("email")->nullable(false);
             $table->timestamps();
         });
     }
@@ -26,6 +26,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists("user");
+        Schema::dropIfExists("users");
     }
 };

@@ -15,17 +15,19 @@ return new class extends Migration {
             $table->unsignedBigInteger("application_id");
             $table->unsignedBigInteger("user_id");
             $table->text("content");
+            $table->string("sender"); // sender カラムを追加
             $table->timestamps();
 
             $table
                 ->foreign("application_id")
                 ->references("id")
-                ->on("application")
+                ->on("applications")
                 ->onDelete("cascade");
+
             $table
                 ->foreign("user_id")
                 ->references("id")
-                ->on("user")
+                ->on("users")
                 ->onDelete("cascade");
         });
     }

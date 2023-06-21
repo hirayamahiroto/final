@@ -1,0 +1,4 @@
+
+
+artisan make:event MessageSent
+

@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Company\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Models\User;
 use App\Models\Company;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
@@ -54,5 +53,30 @@ class RegisteredUserController extends Controller
         Auth::guard("company")->login($user);
 
         return redirect(RouteServiceProvider::COMPANY_HOME);
+    }
+
+    public function user_store(Request $request): RedirectResponse
+    {
+        $request->validate([
+            "name" => ["required", "string", "max:255"],
+            "email" => [
+                "required",
+                "string",
+                "email",
+                "max:255",
+                "unique:" . Company::class,
+            ],
+            "password" => ["required", "confirmed", Rules\Password::defaults()],
+        ]);
+
+        $user = Company::create([
+            "name" => $request->name,
+            "email" => $request->email,
+            "password" => Hash::make($request->password),
+        ]);
+
+        event(new Registered($user));
+
+        Auth::guard("company")->login($user);
     }
 }
