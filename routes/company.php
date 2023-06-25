@@ -16,8 +16,6 @@ Route::middleware("guest:company")->group(function () {
         "register"
     );
 
-    Route::post("register", [RegisteredUserController::class, "store"]);
-
     Route::get("login", [
         AuthenticatedSessionController::class,
         "create",
@@ -44,6 +42,11 @@ Route::middleware("guest:company")->group(function () {
         NewPasswordController::class,
         "store",
     ])->name("password.store");
+
+    Route::get("user_login", [
+        AuthenticatedSessionController::class,
+        "user_create",
+    ])->name("company.user_login");
 });
 
 Route::middleware("auth:company")->group(function () {

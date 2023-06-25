@@ -10,13 +10,14 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create("application", function (Blueprint $table) {
+        Schema::create("applications", function (Blueprint $table) {
             $table->bigIncrements("id");
             // ユーザー（外部キー）
             $table
-                ->foreignId("use_id")
-                ->constrained("user")
-                ->cascadeOnDelete();
+                ->foreignId("user_id")
+                ->constrained("users")
+                ->cascadeOnDelete()
+                ->default("0");
             //求人情報(外部キー)
             $table
                 ->foreignId("offer_id")
@@ -32,6 +33,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists("application");
+        Schema::dropIfExists("applications");
     }
 };

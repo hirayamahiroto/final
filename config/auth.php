@@ -54,6 +54,11 @@ return [
             "driver" => "session",
             "provider" => "companies",
         ],
+
+        "company_users" => [
+            "driver" => "session",
+            "provider" => "company_users",
+        ],
     ],
 
     /*
@@ -88,6 +93,11 @@ return [
         "companies" => [
             "driver" => "eloquent",
             "model" => App\Models\Company::class,
+        ],
+
+        "company_users" => [
+            "driver" => "eloquent",
+            "model" => App\Models\CompanyUser::class,
         ],
     ],
 
@@ -128,6 +138,13 @@ return [
         "companies" => [
             // 追加
             "provider" => "companies", // 追加
+            "table" => "password_resets", // 追加
+            "expire" => 60, // 追加
+            "throttle" => 60, // 追加
+        ],
+        "company_users" => [
+            // 追加
+            "provider" => "company_users", // 追加
             "table" => "password_resets", // 追加
             "expire" => 60, // 追加
             "throttle" => 60, // 追加

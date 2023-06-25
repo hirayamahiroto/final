@@ -28,6 +28,8 @@ class RedirectIfAuthenticated
                     return redirect(RouteServiceProvider::ADMIN_HOME);
                 } elseif ($guard == "company") {
                     return redirect(RouteServiceProvider::COMPANY_HOME);
+                } elseif ($guard == "user") {
+                    return redirect(RouteServiceProvider::USER_HOME);
                 } else {
                     return redirect(RouteServiceProvider::HOME);
                 }

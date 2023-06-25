@@ -16,7 +16,7 @@
     </head>
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
-            @include('layouts.navigation')
+            @include('layouts.app_navigation')
 
             <!-- Page Heading -->
             @if (isset($header))
@@ -27,10 +27,16 @@
                 </header>
             @endif
 
+            <div class="flex">
+            {{-- sidebar --}}
+            @include('layouts.app_sidebar')
+
             <!-- Page Content -->
             <main>
                 {{ $slot }}
             </main>
+
+            </div>
         </div>
     </body>
 </html>
